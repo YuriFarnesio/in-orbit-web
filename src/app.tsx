@@ -1,21 +1,13 @@
-import { Plus } from 'lucide-react'
-import letsStart from './assets/lets-start-illustration.svg'
-import logo from './assets/logo-in-orbit.svg'
-import { Button } from './components/ui/button'
+import { CreateGoal } from './components/create-goal'
+import { EmptyGoals } from './components/empty-goals'
+import { Dialog } from './components/ui/dialog'
 
 export function App() {
   return (
-    <div className="h-screen flex flex-col items-center justify-center gap-8">
-      <img src={logo} alt="in.orbit" />
-      <img src={letsStart} alt="in.orbit" />
-      <p className="max-w-80 text-zinc-300 leading-relaxed text-center">
-        Você ainda não cadastrou nenhuma meta, que tal cadastrar um agora mesmo?
-      </p>
+    <Dialog>
+      <EmptyGoals />
 
-      <Button>
-        <Plus className="size-4" />
-        Cadastrar meta
-      </Button>
-    </div>
+      <CreateGoal />
+    </Dialog>
   )
 }
