@@ -14,7 +14,7 @@ export function RadioGroupItem(props: RadioGroupPrimitive.RadioGroupItemProps) {
   return (
     <RadioGroupPrimitive.RadioGroupItem
       {...props}
-      className="group bg-black border border-zinc-900 rounded-lg px-4 py-2.5 flex items-center justify-between outline-none hover:border-zinc-800 focus-visible:border-pink-500 focus-visible:ring-4 ring-pink-500/10 data-[state=checked]:bg-pink-500/5 data-[state=checked]:border-pink-500"
+      className="group flex items-center justify-between bg-black data-[state=checked]:bg-pink-500/5 border border-zinc-900 data-[state=checked]:border-pink-500 hover:border-zinc-800 focus-visible:border-pink-500 ring-pink-500/10 focus-visible:ring-4 outline-none rounded-lg py-2.5 px-4 transition-all"
     />
   )
 }
@@ -22,8 +22,8 @@ export function RadioGroupItem(props: RadioGroupPrimitive.RadioGroupItemProps) {
 export function RadioGroupIndicator() {
   return (
     <>
-      <Circle className="size-4 text-zinc-600 group-data-[state=checked]:hidden" />
-      <CheckCircle2 className="size-4 text-pink-500 hidden group-data-[state=checked]:inline" />
+      <Circle className="size-4 group-data-[state=checked]:hidden text-zinc-600" />
+      <CheckCircle2 className="size-4 hidden group-data-[state=checked]:inline text-pink-500" />
     </>
   )
 }

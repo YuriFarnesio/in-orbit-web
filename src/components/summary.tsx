@@ -107,7 +107,7 @@ export function Summary() {
                       <button
                         type="button"
                         onClick={() => handleDeleteGoalCompletion(goal.id)}
-                        className="text-xs leading-relaxed underline text-zinc-500 hover:text-zinc-400 focus-visible:text-zinc-400"
+                        className="text-xs leading-relaxed underline text-zinc-500 hover:text-zinc-400 focus-visible:text-zinc-400 transition"
                       >
                         Desfazer
                       </button>

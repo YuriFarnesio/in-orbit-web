@@ -2,18 +2,18 @@ import { forwardRef, type ComponentProps } from 'react'
 import { tv, type VariantProps } from 'tailwind-variants'
 
 const button = tv({
-  base: 'flex items-center justify-center gap-2 rounded-lg text-sm font-medium tracking-tight outline-none ring-offset-2 ring-offset-black focus-visible:ring-2',
+  base: 'flex items-center justify-center text-sm font-medium tracking-tight rounded-lg outline-none ring-offset-2 ring-offset-black focus-visible:ring-2 gap-2 transition-all',
 
   variants: {
     variant: {
       primary:
-        'bg-violet-500 text-violet-50 hover:bg-violet-600 ring-violet-500',
-      secondary: 'bg-zinc-900 text-zinc-400 hover:bg-zinc-800 ring-zinc-900',
+        'bg-violet-500 hover:bg-violet-600 text-violet-50 ring-violet-500',
+      secondary: 'bg-zinc-900 hover:bg-zinc-800 text-zinc-400 ring-zinc-900',
     },
 
     size: {
-      default: 'px-4 py-2.5',
-      sm: 'px-3 py-1.5',
+      default: 'py-2.5 px-4',
+      sm: 'py-1.5 px-3',
     },
   },
 
