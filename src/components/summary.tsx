@@ -1,7 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import dayjs from 'dayjs'
 import ptBR from 'dayjs/locale/pt-br'
 import { CheckCircle2, Plus } from 'lucide-react'
+import { deleteGoalCompletion } from '../http/delete-goal-completion'
 import { getSummary } from '../http/get-summary'
 import { InOrbitIcon } from './in-orbit-icon'
 import { PendingGoals } from './pending-goals'
@@ -13,6 +14,8 @@ import { Separator } from './ui/separator'
 dayjs.locale(ptBR)
 
 export function Summary() {
+  const queryClient = useQueryClient()
+
   const { data } = useQuery({
     queryKey: ['summary'],
     queryFn: getSummary,
@@ -27,6 +30,13 @@ export function Summary() {
   const lastDayOfWeek = dayjs().endOf('week').format('D MMM')
 
   const completedPercentage = Math.round((data.completed * 100) / data.total)
+
+  async function handleDeleteGoalCompletion(goalCompletionId: string) {
+    await deleteGoalCompletion(goalCompletionId)
+
+    queryClient.invalidateQueries({ queryKey: ['summary'] })
+    queryClient.invalidateQueries({ queryKey: ['pending-goals'] })
+  }
 
   return (
     <div className="max-w-[480px] flex flex-col gap-6 py-10 px-5 mx-auto">
@@ -77,7 +87,7 @@ export function Summary() {
             <div key={date} className="flex flex-col gap-4">
               <h3 className="font-medium">
                 <span className="capitalize">{weekDay}</span>{' '}
-                <span className="text-zinc-400 text-xs">({formattedDate})</span>
+                <span className="text-xs text-zinc-400">({formattedDate})</span>
               </h3>
 
               <ul className="flex flex-col gap-3">
@@ -87,11 +97,20 @@ export function Summary() {
                   return (
                     <li key={goal.id} className="flex items-center gap-2">
                       <CheckCircle2 className="size-4 text-pink-500" />
+
                       <span className="text-sm text-zinc-400">
                         Você completou "
                         <span className="text-zinc-100">{goal.title}</span>" às{' '}
                         <span className="text-zinc-100">{time}h</span>
                       </span>
+
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteGoalCompletion(goal.id)}
+                        className="text-xs leading-relaxed underline text-zinc-500 hover:text-zinc-400 focus-visible:text-zinc-400"
+                      >
+                        Desfazer
+                      </button>
                     </li>
                   )
                 })}
