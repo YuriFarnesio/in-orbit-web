@@ -26,7 +26,11 @@ const createGoalForm = z.object({
 
 type CreateGoalForm = z.infer<typeof createGoalForm>
 
-export function CreateGoal() {
+type CreateGoalProps = {
+  setDialogOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export function CreateGoal({ setDialogOpen }: CreateGoalProps) {
   const queryClient = useQueryClient()
 
   const { register, control, handleSubmit, formState, reset } =
@@ -41,6 +45,7 @@ export function CreateGoal() {
     queryClient.invalidateQueries({ queryKey: ['pending-goals'] })
 
     reset()
+    setDialogOpen(false)
   }
 
   return (
